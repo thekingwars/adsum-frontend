@@ -1,0 +1,173 @@
+<div class="container-fluid">
+  <div class="card text-bg-success my-3">
+    <div class="card-body">
+      <h1 class="text-center">Contacto de Soporte!</h1>
+    </div>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div
+      class="form-group mb-2"
+      [ngClass]="{
+        'needs-validation': !isValidField('fullName'),
+        'was-validated': isValidField('fullName')
+      }"
+    >
+      <label for="name">Nombre Completo</label>
+      <input
+        type="text"
+        class="form-control"
+        id="fullName"
+        name="fullName"
+        required
+        formControlName="fullName"
+      />
+      <div *ngIf="isValidField('fullName')" class="text-danger">
+        {{ getErrorMessage("fullName") }}
+      </div>
+    </div>
+
+    <div
+      class="form-group mb-2"
+      [ngClass]="{
+        'needs-validation': !isValidField('companyName'),
+        'was-validated': isValidField('companyName')
+      }"
+    >
+      <label for="email">Nombre de la Empresa</label>
+      <input
+        type="text"
+        class="form-control"
+        id="companyName"
+        name="companyName"
+        required
+        formControlName="companyName"
+      />
+      <div *ngIf="isValidField('companyName')" class="text-danger">
+        {{ getErrorMessage("companyName") }}
+      </div>
+    </div>
+
+    <div
+      class="form-group mb-2"
+      [ngClass]="{
+        'needs-validation': !isValidField('email'),
+        'was-validated': isValidField('email')
+      }"
+    >
+      <label for="phone">Correo Electrónico</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        required
+        formControlName="email"
+      />
+
+      <div *ngIf="isValidField('email')" class="text-danger">
+        {{ getErrorMessage("email") }}
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <div
+          class="form-group"
+          [ngClass]="{
+            'needs-validation': !isValidField('phone'),
+            'was-validated': isValidField('phone')
+          }"
+        >
+          <label for="phone">Teléfono</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            name="phone"
+            required
+            formControlName="phone"
+          />
+        </div>
+        <div *ngIf="isValidField('phone')" class="text-danger">
+          {{ getErrorMessage("phone") }}
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="phone">Categoría</label>
+          <select class="form-select" formControlName="category">
+            <option value="billing">Facturación</option>
+            <option value="technical">Soporte Técnico</option>
+            <option value="sales">Ventas</option>
+            <option value="general">Información General</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="form-group"
+      [ngClass]="{
+        'needs-validation': !isValidField('message'),
+        'was-validated': isValidField('message')
+      }"
+    >
+      <label for="phone">Mensaje</label>
+      <textarea
+        class="form-control"
+        id="message"
+        name="message"
+        required
+        formControlName="message"
+        maxlength="120"
+        minlength="12"
+      ></textarea>
+      <div *ngIf="isValidField('message')" class="text-danger">
+        {{ getErrorMessage("message") }}
+      </div>
+      <p class="text-end">{{ (changeMessageLetters$ | async) ?? 0 }}/120</p>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-success mt-3"
+      [disabled]="form.invalid"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-send"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"
+        />
+      </svg>
+      Enviar
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-primary mt-3 mx-3"
+      routerLink="/adsum/contacts"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-back"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"
+        />
+      </svg>
+      Volver
+    </button>
+  </form>
+</div>
