@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgbHighlight, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContactsRoutingModule } from './contacts-routing.module';
 import { ContactsComponent } from './contacts.component';
+import { PipesModule } from '../../../../shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [ContactsComponent],
@@ -11,6 +12,7 @@ import { ContactsComponent } from './contacts.component';
     ContactsRoutingModule,
     NgbPaginationModule,
     NgbHighlight,
+    PipesModule,
   ],
 })
 export class ContactsModule {}

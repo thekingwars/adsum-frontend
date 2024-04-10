@@ -6,7 +6,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { debounceTime, map } from 'rxjs';
+import { debounceTime, map, tap } from 'rxjs';
+import { ContactService } from '../../services/contact.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-contact',
@@ -75,8 +77,23 @@ export class CreateContactComponent {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    this.contactService
+      .addContact(this.form.value)
+      .pipe(
+        tap(() => {
+          alert('Mensaje enviado con éxito');
+
+          this.form.reset();
+
+          this.router.navigate(['/adsum/contacts']);
+        })
+      )
+      .subscribe();
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private contactService: ContactService,
+    private router: Router
+  ) {}
 }
